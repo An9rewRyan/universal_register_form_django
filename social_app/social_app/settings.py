@@ -14,7 +14,7 @@ from pathlib import Path
 import os 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main.apps.MainConfig',
+    "sslserver",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -46,7 +47,8 @@ INSTALLED_APPS = [
     "allauth.socialaccount", # new
     # social providers
     "allauth.socialaccount.providers.github", # new
-    "allauth.socialaccount.providers.twitter", # new
+    "allauth.socialaccount.providers.twitter",
+    "allauth.socialaccount.providers.facebook", # new
 ]
 
 
@@ -139,9 +141,33 @@ MEDIA_URL = '/media/'
 
 AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
+    'django.contrib.auth.backends.ModelBackend',
 )
+SOCIALACCOUNT_PROVIDERS = \
+    {'facebook':
+       {'METHOD': 'oauth2',
+        'SCOPE': ['email','public_profile', 'user_friends'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time'],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'kr_KR',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v2.4'}}
 
 SITE_ID = 1
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_USERNAME_REQURIED=True
 #ACCOUNT_EMAIL_VERIFICATION = "none"
-LOGIN_REDIRECT_URL = "http://localhost:8000/main/"
+LOGIN_REDIRECT_URL = "https://localhost:8000/main/"
 ACCOUNT_LOGOUT_ON_GET = True

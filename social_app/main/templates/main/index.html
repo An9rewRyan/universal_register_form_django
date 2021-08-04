@@ -18,6 +18,15 @@
       <i class="fa fa-github fa-fw"></i>
       <span>Login with GitHub</span>
     </a>
+        <fb:login-button 
+        scope="public_profile,email"
+        onlogin="checkLoginState();">
+        </fb:login-button>  
+        <a href="{% provider_login_url "facebook" method="js_sdk" %}">Login Button image</a>
+        <a href="{% provider_login_url "facebook" method="js_sdk" %}" class="btn btn-block btn-social btn-facebook" style="background-color:#3b5998;text-align:center">
+            <span class="fa fa-facebook"></span>
+                         Sign in with Facebook
+           </a>
     <!-- GitHub button ends here -->
   {% endif %}
 </div>
