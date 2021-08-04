@@ -21,7 +21,8 @@ SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '7bfavni6p!ewsodjmelr(fxg_5qcgcd$cejs%d+%393jl2804z'
-
+google_kliend_id = '655426398492-rul5m4hooj18s2t6013ahkfg9not120d.apps.googleusercontent.com'
+google_client_secret = 'JRi7eXyW4f_rezU8gSYUIN6A'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -40,15 +41,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.sites",  # new
+    "django.contrib.sites", 
     # 3rd party
-    "allauth", # new
-    "allauth.account", # new
-    "allauth.socialaccount", # new
+    "allauth", 
+    "allauth.account", 
+    "allauth.socialaccount", 
     # social providers
-    "allauth.socialaccount.providers.github", # new
+    "allauth.socialaccount.providers.github", 
     "allauth.socialaccount.providers.twitter",
-    "allauth.socialaccount.providers.facebook", # new
+    "allauth.socialaccount.providers.facebook", 
+    'allauth.socialaccount.providers.google',
 ]
 
 
@@ -144,7 +146,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 SOCIALACCOUNT_PROVIDERS = \
-    {'facebook':
+    {
+    'facebook':
        {'METHOD': 'oauth2',
         'SCOPE': ['email','public_profile', 'user_friends'],
         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
@@ -163,11 +166,23 @@ SOCIALACCOUNT_PROVIDERS = \
         'EXCHANGE_TOKEN': True,
         'LOCALE_FUNC': lambda request: 'kr_KR',
         'VERIFIED_EMAIL': False,
-        'VERSION': 'v2.4'}}
+        'VERSION': 'v2.4'},
+
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 
 SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_USERNAME_REQURIED=True
 #ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = "https://localhost:8000/main/"
+LOGOUT_REDIRECT_URL = 'https://localhost:8000/main/'
 ACCOUNT_LOGOUT_ON_GET = True
