@@ -46,11 +46,15 @@ INSTALLED_APPS = [
     "allauth", 
     "allauth.account", 
     "allauth.socialaccount", 
+    'allauth.socialaccount.providers.openid',
     # social providers
     "allauth.socialaccount.providers.github", 
     "allauth.socialaccount.providers.twitter",
     "allauth.socialaccount.providers.facebook", 
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.instagram',
+    'allauth.socialaccount.providers.discord',
+    'allauth.socialaccount.providers.steam',
 ]
 
 
@@ -180,8 +184,7 @@ SOCIALACCOUNT_PROVIDERS = \
 }
 
 SITE_ID = 1
-ACCOUNT_EMAIL_REQUIRED=True
-ACCOUNT_USERNAME_REQURIED=True
+
 #ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = "https://localhost:8000/main/"
 LOGOUT_REDIRECT_URL = 'https://localhost:8000/main/'

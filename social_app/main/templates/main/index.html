@@ -18,6 +18,7 @@
       <i class="fa fa-github fa-fw"></i>
       <span>Login with GitHub</span>
     </a>
+    
         <fb:login-button 
         scope="public_profile,email"
         onlogin="checkLoginState();">
@@ -27,7 +28,11 @@
             <span class="fa fa-facebook"></span>
                          Sign in with Facebook
            </a>
+
            <a href="{% provider_login_url 'google' %}">Login With Google</a>
+           <a href="{% provider_login_url 'instagram' %}">Login With Instagram</a>
+           <a href="{% provider_login_url 'discord' %}">Login With Discord</a>
+           <a href="{% provider_login_url 'steam' %}">Login With Steam</a>
     <!-- GitHub button ends here -->
   {% endif %}
 </div>
